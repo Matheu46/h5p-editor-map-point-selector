@@ -4,7 +4,7 @@
   var DEFAULT_CENTER = {
     lat: -14.2350,
     lng: -51.9253,
-    zoom: 4
+    zoom: 14
   };
 
   var SEARCH_ENDPOINT = 'https://nominatim.openstreetmap.org/search?format=json&limit=1&q=';
@@ -28,6 +28,7 @@
     this.$wrapper = null;
     this.$searchInput = null;
     this.$searchButton = null;
+    this.$focusBtn = null;
     this.$mapContainer = null;
     this.$coordinates = null;
     this.map = null;
@@ -77,26 +78,20 @@
       'placeholder="Buscar cidade, estado ou endereço..." />'
     );
     self.$searchButton = $(
-      '<button type="button" class="editor-map-search-button">Buscar</button>'
+      '<button type="button" class="editor-map-search-btn">Buscar</button>'
+    );
+    self.$focusBtn = $(
+      '<button type="button" class="editor-map-focus-btn h5p-button" ' +
+      'style="display: none; margin-left: auto;">Focar no Ponto</button>'
     );
     self.$mapContainer = $('<div class="editor-map-container" aria-label="Mapa Interativo"></div>');
     self.$coordinates = $('<div class="editor-map-coordinates">Latitude: -, Longitude: -</div>');
 
-    var $searchContainer = $('<div class="editor-map-search"></div>');
+    var $searchContainer = $('<div class="editor-map-search-container"></div>');
     $searchContainer
-      .css({
-        display: 'flex',
-        gap: '0.5rem',
-        'margin-bottom': '0.75rem',
-        'align-items': 'center'
-      })
       .append(self.$searchInput)
-      .append(self.$searchButton);
-
-    self.$searchInput.css({
-      flex: '1 1 auto',
-      'min-width': '0'
-    });
+      .append(self.$searchButton)
+      .append(self.$focusBtn);
 
     self.$wrapper
       .append($searchContainer)
@@ -112,6 +107,12 @@
       if (event.key === 'Enter') {
         event.preventDefault();
         self.performSearch(self.$searchInput.val());
+      }
+    });
+
+    self.$focusBtn.on('click', function () {
+      if (self.params.latitude !== undefined && self.params.longitude !== undefined) {
+        self.map.flyTo([self.params.latitude, self.params.longitude], 15);
       }
     });
 
@@ -146,6 +147,7 @@
     }).addTo(self.map);
 
     if (self.hasInitialCoordinates) {
+      self.$focusBtn.show();
       self.setMarker(self.currentCenter.lat, self.currentCenter.lng);
       self.updateCoordinatesLabel(self.currentCenter.lat, self.currentCenter.lng);
     }
@@ -154,6 +156,7 @@
       var lat = event.latlng.lat;
       var lng = event.latlng.lng;
 
+      self.$focusBtn.show();
       self.setMarker(lat, lng);
       self.updateValue(lat, lng);
       self.updateCoordinatesLabel(lat, lng);
