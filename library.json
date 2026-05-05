@@ -5,25 +5,26 @@
   "minorVersion": 0,
   "patchVersion": 0,
   "runnable": 0,
-  "author": "OpenAI",
+  "author": "Matheus Mathias",
   "license": "MIT",
   "description": "Custom H5P editor widget that lets authors pick latitude and longitude from an interactive Leaflet map.",
   "coreApi": {
     "majorVersion": 1,
     "minorVersion": 24
   },
-  "preloadedJs": [
+  "preloadedDependencies": [
     {
-      "path": "leaflet/leaflet.js"
-    },
+      "machineName": "H5P.Leaflet",
+      "majorVersion": 1,
+      "minorVersion": 9
+    }
+  ],
+  "preloadedJs": [
     {
       "path": "map-point-selector.js"
     }
   ],
   "preloadedCss": [
-    {
-      "path": "leaflet/leaflet.css"
-    },
     {
       "path": "map-point-selector.css"
     }
