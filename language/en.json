@@ -1,0 +1,18 @@
+{
+  "libraryStrings": {
+    "searchPlaceholder": "Search for a city, state, or address...",
+    "searchButton": "Search",
+    "focusButton": "Focus on Point",
+    "mapAriaLabel": "Interactive Map",
+    "coordinatesEmpty": "Latitude: -, Longitude: -",
+    "helpText": "Click on the map to define the point coordinates.",
+    "leafletError": "Leaflet could not be loaded. Check the library.json dependencies.",
+    "emptySearchAlert": "Please enter a city, state, or address to search.",
+    "mapNotReadyAlert": "The map is not ready yet. Please try again in a moment.",
+    "searchingText": "Searching...",
+    "noResultsAlert": "No results were found for the provided address.",
+    "searchErrorAlert": "The address search could not be completed. Please try again.",
+    "latitudeLabel": "Latitude: ",
+    "longitudeLabel": ", Longitude: "
+  }
+}

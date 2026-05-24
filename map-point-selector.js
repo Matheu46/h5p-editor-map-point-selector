@@ -75,17 +75,17 @@
     self.$wrapper = $('<div class="h5p-editor-map-point-selector"></div>');
     self.$searchInput = $(
       '<input type="text" class="editor-map-search-input" ' +
-      'placeholder="Buscar cidade, estado ou endereço..." />'
+      'placeholder="' + H5PEditor.t('H5PEditor.MapPointSelector', 'searchPlaceholder') + '" />'
     );
     self.$searchButton = $(
-      '<button type="button" class="editor-map-search-btn">Buscar</button>'
+      '<button type="button" class="editor-map-search-btn">' + H5PEditor.t('H5PEditor.MapPointSelector', 'searchButton') + '</button>'
     );
     self.$focusBtn = $(
       '<button type="button" class="editor-map-focus-btn h5p-button" ' +
-      'style="display: none; margin-left: auto;">Focar no Ponto</button>'
+      'style="display: none; margin-left: auto;">' + H5PEditor.t('H5PEditor.MapPointSelector', 'focusButton') + '</button>'
     );
-    self.$mapContainer = $('<div class="editor-map-container" aria-label="Mapa Interativo"></div>');
-    self.$coordinates = $('<div class="editor-map-coordinates">Latitude: -, Longitude: -</div>');
+    self.$mapContainer = $('<div class="editor-map-container" aria-label="' + H5PEditor.t('H5PEditor.MapPointSelector', 'mapAriaLabel') + '"></div>');
+    self.$coordinates = $('<div class="editor-map-coordinates">' + H5PEditor.t('H5PEditor.MapPointSelector', 'coordinatesEmpty') + '</div>');
 
     var $searchContainer = $('<div class="editor-map-search-container"></div>');
     $searchContainer
@@ -96,7 +96,7 @@
     self.$wrapper
       .append($searchContainer)
       .append(self.$mapContainer)
-      .append('<div class="editor-map-help">Click on the map to define the point coordinates.</div>')
+      .append('<div class="editor-map-help">' + H5PEditor.t('H5PEditor.MapPointSelector', 'helpText') + '</div>')
       .append(self.$coordinates);
 
     self.$searchButton.on('click', function () {
@@ -123,7 +123,7 @@
     if (window.L && typeof window.L.map === 'function') {
       self.initializeMap();
     } else {
-      self.$wrapper.append('<div class="h5p-errors">Leaflet could not be loaded. Check the library.json dependencies.</div>');
+      self.$wrapper.append('<div class="h5p-errors">' + H5PEditor.t('H5PEditor.MapPointSelector', 'leafletError') + '</div>');
     }
   };
 
@@ -194,17 +194,17 @@
     }
 
     if (!normalizedQuery) {
-      window.alert('Please enter a city, state, or address to search.');
+      window.alert(H5PEditor.t('H5PEditor.MapPointSelector', 'emptySearchAlert'));
       return;
     }
 
     if (!self.map) {
-      window.alert('The map is not ready yet. Please try again in a moment.');
+      window.alert(H5PEditor.t('H5PEditor.MapPointSelector', 'mapNotReadyAlert'));
       return;
     }
 
     self.isSearching = true;
-    self.$searchButton.text('Buscando...').prop('disabled', true);
+    self.$searchButton.text(H5PEditor.t('H5PEditor.MapPointSelector', 'searchingText')).prop('disabled', true);
 
     window.fetch(SEARCH_ENDPOINT + encodeURIComponent(normalizedQuery), {
       method: 'GET',
@@ -221,7 +221,7 @@
       })
       .then(function (results) {
         if (!Array.isArray(results) || results.length === 0) {
-          window.alert('No results were found for the provided address.');
+          window.alert(H5PEditor.t('H5PEditor.MapPointSelector', 'noResultsAlert'));
           return;
         }
 
@@ -236,11 +236,11 @@
         self.map.flyTo([lat, lng], 13);
       })
       .catch(function () {
-        window.alert('The address search could not be completed. Please try again.');
+        window.alert(H5PEditor.t('H5PEditor.MapPointSelector', 'searchErrorAlert'));
       })
       .finally(function () {
         self.isSearching = false;
-        self.$searchButton.text('Buscar').prop('disabled', false);
+        self.$searchButton.text(H5PEditor.t('H5PEditor.MapPointSelector', 'searchButton')).prop('disabled', false);
       });
   };
 
@@ -281,7 +281,7 @@
    */
   H5PEditor.MapPointSelector.prototype.updateCoordinatesLabel = function (lat, lng) {
     this.$coordinates.text(
-      'Latitude: ' + lat.toFixed(6) + ', Longitude: ' + lng.toFixed(6)
+      H5PEditor.t('H5PEditor.MapPointSelector', 'latitudeLabel') + lat.toFixed(6) + H5PEditor.t('H5PEditor.MapPointSelector', 'longitudeLabel') + lng.toFixed(6)
     );
   };
 
