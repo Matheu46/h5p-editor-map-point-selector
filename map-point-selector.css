@@ -92,6 +92,35 @@
   font-family: monospace;
 }
 
+.h5p-editor-map-point-selector .editor-map-focus-btn {
+  padding: 0.625rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  color: #333;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.h5p-editor-map-point-selector .editor-map-focus-btn:hover {
+  background-color: #f6f8fa;
+  border-color: #b0b0b0;
+}
+
+.h5p-editor-map-point-selector .editor-map-focus-btn:active {
+  background-color: #eef1f6;
+  border-color: #a0a0a0;
+}
+
+.h5p-editor-map-point-selector .editor-map-focus-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.2);
+}
+
 @media (max-width: 640px) {
   .h5p-editor-map-point-selector .editor-map-search-container,
   .h5p-editor-map-point-selector .editor-map-search {
@@ -100,7 +129,9 @@
   }
 
   .h5p-editor-map-point-selector .editor-map-search-btn,
-  .h5p-editor-map-point-selector .editor-map-search-button {
+  .h5p-editor-map-point-selector .editor-map-search-button,
+  .h5p-editor-map-point-selector .editor-map-focus-btn {
     width: 100%;
   }
 }
+
