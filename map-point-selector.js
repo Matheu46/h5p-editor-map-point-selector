@@ -2,8 +2,8 @@
   'use strict';
 
   var DEFAULT_CENTER = {
-    lat: -14.2350,
-    lng: -51.9253,
+    lat: -5.82473,
+    lng: -35.1868,
     zoom: 14
   };
 
